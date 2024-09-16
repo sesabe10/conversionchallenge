@@ -4,14 +4,12 @@ import java.util.Scanner;
 
 public class Conversion {
 
-    private String divisadeDeOrigen;
-    private String divisadeDestino;
     private int opcion = 0;
     private double monto;
     private Moneda moneda;
 
-    private Scanner scanner = new Scanner(System.in);
-    private Map<Integer, String[]> DIVISAS = Map.of(
+    private final Scanner scanner = new Scanner(System.in);
+    private final Map<Integer, String[]> DIVISAS = Map.of(
             1, new String []{"USD", "ARS"},
             2, new String []{"ARS", "USD"},
             3, new String []{"USD", "BRL"},
@@ -31,8 +29,8 @@ public class Conversion {
                     System.out.println("Ingresa el monto a convertir: ");
                     monto = scanner.nextDouble();
                     String [] divisas = getDivisaOrigen(opcion);
-                    divisadeDeOrigen = divisas[0];
-                    divisadeDestino = divisas[1];
+                    String divisadeDeOrigen = divisas[0];
+                    String divisadeDestino = divisas[1];
 
                     //Haciendo la consulta
                     Consulta consulta = new Consulta(divisadeDeOrigen, divisadeDestino, monto);
@@ -72,7 +70,7 @@ public class Conversion {
 
     @Override
     public String toString() {
-        return "EL valor " + monto + " [" + moneda.base_code() + "] " + " corresponde al valor findal de =>>> "
+        return "EL valor " + monto + " [" + moneda.base_code() + "] " + " corresponde al valor findal de =>>>"
                                     + moneda.conversion_result() + " [" + moneda.target_code() + "]";
     }
 }
