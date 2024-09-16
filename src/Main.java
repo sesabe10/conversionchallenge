@@ -28,19 +28,23 @@ public class Main {
                  4) Real brasileño =>> Dólar
                  5) Dólar =>> Peso colombiano
                  6) Peso colombiano =>> Dólar
-                 9) Otras Divisas
-                 7) Salir               \s
+                 7) Otras Divisas
+                 8) Salir               \s
                  Elija una opción valida:
                  **********************************************
                 \s""";
 
-        while (opcion != 7) {
+        while (opcion != 8) {
 
             try {
                 System.out.println(menu);
                 opcion = scanner.nextInt();
-                if (opcion == 7) break;
-                if (opcion == 9) {
+                if (opcion == 8) break;
+                if (opcion < 1 || opcion >= 9) {
+                    System.out.println("Opción inválida. Por favor, ingrese un número entre 1 y 8.");
+                    continue;
+                }
+                if (opcion == 7) {
 
                 } else {
 
