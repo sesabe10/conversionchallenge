@@ -1,6 +1,68 @@
+import com.google.gson.Gson;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        Scanner scanner = new Scanner(System.in);
         Conversion conversion = new Conversion();
-        conversion.iniciar();
+        Consulta consulta;
+
+        String[] divisas;
+        String divisadeDeOrigen;
+        String divisadeDestino;
+
+        int opcion = 0;
+        double monto;
+        String menu = """
+                 **********************************************
+                 Sea bienvenid@ al Conversor de Moneda
+                \s
+                 1) Dólar =>> Peso argentino
+                 2) Peso argentino =>> Dólar
+                 3) Dólar =>> Real brasileño
+                 4) Real brasileño =>> Dólar
+                 5) Dólar =>> Peso colombiano
+                 6) Peso colombiano =>> Dólar
+                 9) Otras Divisas
+                 7) Salir               \s
+                 Elija una opción valida:
+                 **********************************************
+                \s""";
+
+        while (opcion != 7) {
+
+            try {
+                System.out.println(menu);
+                opcion = scanner.nextInt();
+                if (opcion == 7) break;
+                if (opcion == 9) {
+
+                } else {
+
+                    System.out.println("Ingrese el monto a convertir: ");
+                    monto = scanner.nextDouble();
+
+                    divisas = conversion.getDivisaOrigen(opcion);
+                    divisadeDeOrigen = divisas[0];
+                    divisadeDestino = divisas[1];
+
+                    consulta = new Consulta(divisadeDeOrigen, divisadeDestino, monto);
+                    Moneda moneda = consulta.consultarDivisa();
+                    conversion.setHistorialDivisas(moneda, monto);
+                    System.out.println(conversion);
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("La opción ingresa no es una entrada valida");
+                scanner.nextLine();
+            }
+        }
+        System.out.println("Hasta luego, gracias por usar nuestro sistema.");
+        System.out.println("Total de consultas: " + conversion.getHistorialDivisas().size() + "\n" + conversion.getHistorialDivisas());
     }
 }

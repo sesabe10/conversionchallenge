@@ -23,7 +23,7 @@ public class Consulta {
         this.monto = monto;
     }
 
-    public Moneda convertirMoneda()  {
+    public Moneda consultarDivisa()  {
         try {
             uri = new URI("https://v6.exchangerate-api.com/v6/" + APIKEY + "/pair/" + base + "/" + objetivo + "/" + monto);
             HttpClient client = HttpClient.newHttpClient();
