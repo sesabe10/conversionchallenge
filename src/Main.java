@@ -1,12 +1,8 @@
-import com.google.gson.Gson;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         Conversion conversion = new Conversion();
@@ -16,7 +12,7 @@ public class Main {
         String divisadeDeOrigen;
         String divisadeDestino;
 
-        int opcion = 0;
+        int opcion;
         double monto;
         String menu = """
                  **********************************************
@@ -34,7 +30,7 @@ public class Main {
                  **********************************************
                 \s""";
 
-        while (opcion != 8) {
+        while (true) {
 
             try {
                 System.out.println(menu);
@@ -45,7 +41,7 @@ public class Main {
                     continue;
                 }
                 if (opcion == 7) {
-
+                    System.out.println("Otras Divisas");
                 } else {
 
                     System.out.println("Ingrese el monto a convertir: ");
