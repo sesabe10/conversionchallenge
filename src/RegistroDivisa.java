@@ -3,18 +3,16 @@ import java.time.format.DateTimeFormatter;
 
 public class RegistroDivisa {
 
-    private Moneda moneda;
-    private LocalDateTime fecha;
-    private DateTimeFormatter formatter;
-    private double monto;
-
-    public  RegistroDivisa(){}
+    private final Moneda moneda;
+    private final LocalDateTime fecha;
+    private final DateTimeFormatter formatter;
+    private final double monto;
 
     public RegistroDivisa(Moneda moneda, LocalDateTime fecha, double monto) {
         this.moneda = moneda;
         this.fecha = fecha;
         this.monto = monto;
-        formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss");
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
     }
 
     public Moneda getMoneda() {
@@ -25,9 +23,13 @@ public class RegistroDivisa {
         return monto;
     }
 
+    public String getFecha(){
+        return fecha.format(formatter);
+    }
+
     @Override
     public String toString() {
         return "Moneda: " + moneda.base_code()+ " " + monto + " ==> " + moneda.target_code()+ " " + moneda.conversion_result() + " | " +
-                "Fecha: " + fecha.format(formatter) + "\n";
+                "Fecha: " + getFecha() + "\n";
     }
 }

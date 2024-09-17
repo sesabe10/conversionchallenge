@@ -2,18 +2,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+
+    static Scanner scanner = new Scanner(System.in);
+    static Conversion conversion = new Conversion();
+
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        Conversion conversion = new Conversion();
-        Consulta consulta;
-
-        String[] divisas;
-        String divisadeDeOrigen;
-        String divisadeDestino;
-
         int opcion;
-        double monto;
         String menu = """
                  **********************************************
                  Sea bienvenid@ al Conversor de Moneda
@@ -35,30 +30,19 @@ public class Main {
             try {
                 System.out.println(menu);
                 opcion = scanner.nextInt();
+
                 if (opcion == 8) break;
                 if (opcion < 1 || opcion >= 9) {
                     System.out.println("Opción inválida. Por favor, ingrese un número entre 1 y 8.");
                     continue;
                 }
+
                 if (opcion == 7) {
-                    System.out.println("Otras Divisas");
-                } else {
-
-                    System.out.println("Ingrese el monto a convertir: ");
-                    monto = scanner.nextDouble();
-
-                    divisas = conversion.getDivisaOrigen(opcion);
-                    divisadeDeOrigen = divisas[0];
-                    divisadeDestino = divisas[1];
-
-                    consulta = new Consulta(divisadeDeOrigen, divisadeDestino, monto);
-                    Moneda moneda = consulta.consultarDivisa();
-                    conversion.setHistorialDivisas(moneda, monto);
-                    System.out.println(conversion);
-                }
+                    conversion.realizarConversionPersonalizada();
+                } else conversion.realizarConversionAutomatica(opcion);
 
             } catch (InputMismatchException e) {
-                System.out.println("La opción ingresa no es una entrada valida");
+                System.out.println("La opción ingresada no es válida. Por favor, ingrese un número.");
                 scanner.nextLine();
             }
         }
