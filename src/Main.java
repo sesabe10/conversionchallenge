@@ -2,12 +2,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-
-    static Scanner scanner = new Scanner(System.in);
-    static Conversion conversion = new Conversion();
-
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+        Conversion conversion = new Conversion();
         int opcion;
         String menu = """
                  **********************************************
