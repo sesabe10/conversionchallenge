@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
         Conversion conversion = new Conversion();
@@ -22,7 +24,7 @@ public class Main {
                  Elija una opción valida:
                  **********************************************
                 \s""";
-
+        
         while (true) {
 
             try {
@@ -44,7 +46,11 @@ public class Main {
                 scanner.nextLine();
             }
         }
-        System.out.println("Hasta luego, gracias por usar nuestro sistema.");
-        System.out.println("Total de consultas: " + conversion.getHistorialDivisas().size() + "\n" + conversion.getHistorialDivisas());
+
+        System.out.println("Total Conversiones: " + conversion.getHistorialDivisas().size() + "\n");
+        List<String> historial = conversion.getHistorialDivisas();
+        for (String hist : historial) {
+            System.out.println(hist);
+        }
     }
 }

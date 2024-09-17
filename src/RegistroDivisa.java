@@ -12,7 +12,7 @@ public class RegistroDivisa {
         this.moneda = moneda;
         this.fecha = fecha;
         this.monto = monto;
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        formatter = DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm:ss");
     }
 
     public Moneda getMoneda() {
@@ -29,7 +29,13 @@ public class RegistroDivisa {
 
     @Override
     public String toString() {
-        return "Moneda: " + moneda.base_code()+ " " + monto + " ==> " + moneda.target_code()+ " " + moneda.conversion_result() + " | " +
-                "Fecha: " + getFecha() + "\n";
+        return String.format("Conversión de %s a %s:\n" +
+                        "  Monto original: %s %s\n" +
+                        "  Monto convertido: %s %s\n" +
+                        "  Fecha: %s\n",
+                moneda.base_code(), moneda.target_code(),
+                monto, moneda.base_code(),
+                moneda.conversion_result(), moneda.target_code(),
+                getFecha());
     }
 }

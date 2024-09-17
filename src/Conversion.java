@@ -1,10 +1,14 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class Conversion {
 
     private List<RegistroDivisa> historialDivisas;
-    private Map<Integer, String[]> DIVISAS = Map.of();
+    private final Map<Integer, String[]> DIVISAS;
     RegistroDivisa divisa;
 
     private final Scanner scanner = new Scanner(System.in);
@@ -65,7 +69,7 @@ public class Conversion {
             Consulta consulta = new Consulta(monedaBase, monedaObjetivo, monto);
             Moneda moneda = consulta.consultarDivisa();
             this.setHistorialDivisas(moneda, monto);
-            System.out.println(Main.conversion);
+            System.out.println(this);
         } catch (Exception e) {
             System.out.println("Error al procesar la conversión: " + e.getMessage());
         }
@@ -75,8 +79,24 @@ public class Conversion {
         return DIVISAS.get(opcion);
     }
 
-    List<RegistroDivisa> getHistorialDivisas() {
-        return historialDivisas;
+    List<String> getHistorialDivisas() {
+        List<String> historialStrings = new ArrayList<>();
+        for (RegistroDivisa registroDivisa : historialDivisas) {
+            historialStrings.add(registroDivisa.toString());
+        }
+        return historialStrings;
+    }
+
+    public void lerrHistorial(){
+        try (BufferedReader br = new BufferedReader(new FileReader("historial.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+
+        }
     }
 
     public void setHistorialDivisas(Moneda moneda, double monto) {
