@@ -10,19 +10,19 @@ public class Main {
         Conversion conversion = new Conversion();
         int opcion;
         String menu = """
-                 **********************************************
-                 Sea bienvenid@ al Conversor de Moneda
-                \s
-                 1) Dólar =>> Peso argentino
-                 2) Peso argentino =>> Dólar
-                 3) Dólar =>> Real brasileño
-                 4) Real brasileño =>> Dólar
-                 5) Dólar =>> Peso colombiano
-                 6) Peso colombiano =>> Dólar
-                 7) Otras Divisas
-                 8) Salir               \s
-                 Elija una opción valida:
-                 **********************************************
+                 $══════════════════════════════════════════════$
+                 ║ Sea bienvenid@ al Conversor de Moneda        ║ \s
+                 ║                                              ║
+                 ║ 1) Dólar =>> Peso argentino                  ║
+                 ║ 2) Peso argentino =>> Dólar                  ║
+                 ║ 3) Dólar =>> Real brasileño                  ║
+                 ║ 4) Real brasileño =>> Dólar                  ║
+                 ║ 5) Dólar =>> Peso colombiano                 ║
+                 ║ 6) Peso colombiano =>> Dólar                 ║
+                 ║ 7) Otras Divisas                             ║
+                 ║ 8) Salir                                     ║
+                 ║ Elija una opción valida:                     ║ \s
+                 $══════════════════════════════════════════════$
                 \s""";
         
         while (true) {
@@ -46,7 +46,6 @@ public class Main {
                 scanner.nextLine();
             }
         }
-
         System.out.println("Total Conversiones: " + conversion.getHistorialDivisas().size() + "\n");
         List<String> historial = conversion.getHistorialDivisas();
         for (String hist : historial) {

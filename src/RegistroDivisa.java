@@ -29,10 +29,12 @@ public class RegistroDivisa {
 
     @Override
     public String toString() {
-        return String.format("Conversión de %s a %s:\n" +
-                        "  Monto original: %s %s\n" +
-                        "  Monto convertido: %s %s\n" +
-                        "  Fecha: %s\n",
+        return String.format("""
+                        Conversión de %s a %s:
+                          Monto original: %s %s
+                          Monto convertido: %s %s
+                          Fecha: %s
+                        """,
                 moneda.base_code(), moneda.target_code(),
                 monto, moneda.base_code(),
                 moneda.conversion_result(), moneda.target_code(),

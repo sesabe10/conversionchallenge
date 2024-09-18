@@ -1,13 +1,9 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class Conversion {
 
-    private List<RegistroDivisa> historialDivisas;
+    private final List<RegistroDivisa> historialDivisas;
     private final Map<Integer, String[]> DIVISAS;
     RegistroDivisa divisa;
 
@@ -28,7 +24,7 @@ public class Conversion {
 
     public void realizarConversionPersonalizada() {
         try {
-            scanner.nextLine();
+
             System.out.println("Ingresa la divisa base: ");
             String monedaBase = scanner.nextLine();
 
@@ -36,12 +32,17 @@ public class Conversion {
             String monedaObjetivo = scanner.nextLine();
 
             System.out.println("Ingrese el monto: ");
-            monto = Double.parseDouble(scanner.nextLine());
+            monto = scanner.nextDouble();
 
-            procesarConversion(monedaBase, monedaObjetivo, monto);
+            if (validarMonto(monto)){
+                procesarConversion(monedaBase, monedaObjetivo, monto);
+            }else{
+                System.out.println("Debe ingresar un monto valido");
+            }
+            scanner.nextLine();
 
-        } catch (NumberFormatException e) {
-            System.out.println("El monto ingresado no es válido.");
+        } catch (NumberFormatException | InputMismatchException | IllegalStateException e) {
+            System.out.println("Error ha ingresado un caracter no valido");
             scanner.nextLine();
         }
     }
@@ -56,7 +57,11 @@ public class Conversion {
             String divisaOrigen = divisas[0];
             String divisaDestino = divisas[1];
 
-            procesarConversion(divisaOrigen, divisaDestino, monto);
+            if (validarMonto(monto)){
+                 procesarConversion(divisaOrigen, divisaDestino, monto);
+            }else{
+                System.out.println("Debe ingresar un monto valido");
+            }
 
         } catch (InputMismatchException e) {
             System.out.println("El monto ingresado no es válido.");
@@ -66,6 +71,7 @@ public class Conversion {
 
     private void procesarConversion(String monedaBase, String monedaObjetivo, double monto) {
         try {
+            System.out.println("Procesando conversion...");
             Consulta consulta = new Consulta(monedaBase, monedaObjetivo, monto);
             Moneda moneda = consulta.consultarDivisa();
             this.setHistorialDivisas(moneda, monto);
@@ -73,6 +79,10 @@ public class Conversion {
         } catch (Exception e) {
             System.out.println("Error al procesar la conversión: " + e.getMessage());
         }
+    }
+
+    private boolean validarMonto(double monto){
+        return !(monto <= 0);
     }
 
     String[] getDivisaOrigen(int opcion) {
@@ -85,18 +95,6 @@ public class Conversion {
             historialStrings.add(registroDivisa.toString());
         }
         return historialStrings;
-    }
-
-    public void lerrHistorial(){
-        try (BufferedReader br = new BufferedReader(new FileReader("historial.txt"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-
-        }
     }
 
     public void setHistorialDivisas(Moneda moneda, double monto) {
