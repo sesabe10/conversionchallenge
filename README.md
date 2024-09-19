@@ -2,7 +2,7 @@
 
 ### Este proyecto te permite:
 
-- Convertir entre diversas monedas: ¡Del dólar al euro, del yen al peso, y más!
+- Convertir entre diversas monedas: ¡Del dólar al peso Colombiano, del peso argentino a dóalar, y más!
 - Obtener tasas de cambio en tiempo real: Siempre estarás al tanto de las últimas fluctuaciones del mercado.
 
 ## Tecnologías usadas
