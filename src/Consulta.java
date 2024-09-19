@@ -36,7 +36,7 @@ public class Consulta {
             return gson.fromJson(response.body(), Moneda.class);
 
         } catch (URISyntaxException | IOException | InterruptedException e) {
-            throw new RuntimeException("Ha ocurrido un error: " + e);
+            throw new RuntimeException("Ha ocurrido un error: " + e.getMessage());
         }
     }
 }

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -71,11 +72,13 @@ public class Conversion {
 
     private void procesarConversion(String monedaBase, String monedaObjetivo, double monto) {
         try {
+
             System.out.println("Procesando conversion...");
             Consulta consulta = new Consulta(monedaBase, monedaObjetivo, monto);
             Moneda moneda = consulta.consultarDivisa();
             this.setHistorialDivisas(moneda, monto);
             System.out.println(this);
+
         } catch (Exception e) {
             System.out.println("Error al procesar la conversión: " + e.getMessage());
         }

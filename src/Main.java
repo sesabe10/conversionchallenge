@@ -24,7 +24,7 @@ public class Main {
                  ║ Elija una opción valida:                     ║ \s
                  $══════════════════════════════════════════════$
                 \s""";
-        
+
         while (true) {
 
             try {
